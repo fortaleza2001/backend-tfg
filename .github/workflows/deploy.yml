@@ -26,6 +26,7 @@ jobs:
             cd /home/juan/backend-tfg
             git checkout desarrollo
             git pull origin desarrollo 
+            echo "${{ secrets.LARAVEL_ENV_DESARROLLO }}" > /home/juan/backend-tfg/.env
             composer update
             php artisan migrate:refresh --seed
             echo " Deteniendo cualquier proceso en el puerto 8000..."
