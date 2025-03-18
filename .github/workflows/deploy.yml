@@ -16,7 +16,8 @@ jobs:
       - name: Setup SSH Key
         run: |
           printf "%s" "${{ secrets.AWS_SSH_KEY }}" > aws_key.pem
-          chmod 777 aws_key.pem
+          chmod 600 aws_key.pem
+
           
 
       - name: Connect to EC2 and Pull Changes
