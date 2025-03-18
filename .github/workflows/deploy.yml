@@ -3,7 +3,7 @@ name: Deploy to AWS desarrollo
 on:
   push:
     branches:
-      - desarrollo  # O cambia 'main' a 'develop' si es la rama que usas
+      - desarrollo  
 
 jobs:
   deploy:
@@ -20,8 +20,9 @@ jobs:
 
       - name: Connect to EC2 and Pull Changes
         run: |
-          ssh -o StrictHostKeyChecking=no -i aws_key.pem ubuntu@EC2_PUBLIC_IP << 'EOF'
-            cd /ruta/del/proyecto  # Reemplaza con la ruta correcta
-            git pull origin main  # O la rama que estés usando
+          ssh -o StrictHostKeyChecking=no -i aws_key.pem juan@ec2-3-92-214-254.compute-1.amazonaws.com << 'EOF'
+            cd /home/juan/backend-tfg
+            git checkout desarrollo
+            git pull origin desarrollo  
             exit
           EOF
