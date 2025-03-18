@@ -15,14 +15,15 @@ jobs:
 
       - name: Setup SSH Key
         run: |
-          echo "${{ secrets.AWS_SSH_KEY }}" > aws_key.pem
-          chmod 600 aws_key.pem
+          printf "%s" "${{ secrets.AWS_SSH_KEY }}" > aws_key.pem
+          chmod 777 aws_key.pem
+          
 
       - name: Connect to EC2 and Pull Changes
         run: |
           ssh -o StrictHostKeyChecking=no -i aws_key.pem juan@ec2-3-92-214-254.compute-1.amazonaws.com << 'EOF'
             cd /home/juan/backend-tfg
             git checkout desarrollo
-            git pull origin desarrollo  
+            git pull origin desarrollo 
             exit
           EOF
