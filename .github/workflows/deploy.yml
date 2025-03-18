@@ -1,0 +1,27 @@
+name: Deploy to AWS desarrollo
+
+on:
+  push:
+    branches:
+      - desarrollo  # O cambia 'main' a 'develop' si es la rama que usas
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup SSH Key
+        run: |
+          echo "${{ secrets.AWS_SSH_KEY }}" > aws_key.pem
+          chmod 600 aws_key.pem
+
+      - name: Connect to EC2 and Pull Changes
+        run: |
+          ssh -o StrictHostKeyChecking=no -i aws_key.pem ubuntu@EC2_PUBLIC_IP << 'EOF'
+            cd /ruta/del/proyecto  # Reemplaza con la ruta correcta
+            git pull origin main  # O la rama que estés usando
+            exit
+          EOF
