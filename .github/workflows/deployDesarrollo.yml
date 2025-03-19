@@ -22,7 +22,7 @@ jobs:
 
       - name: Connect to EC2 and Pull Changes
         run: |
-          ssh -o StrictHostKeyChecking=no -i aws_key.pem juan@ec2-3-92-214-254.compute-1.amazonaws.com << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i aws_key.pem juan@ec2-3-228-202-70.compute-1.amazonaws.com << 'EOF'
             cd /home/juan/desarrollo/backend-tfg
             git checkout desarrollo
             git pull origin desarrollo 
