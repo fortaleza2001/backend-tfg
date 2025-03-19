@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('direccion');
             $table->string('pais');
+            $table->string('telefono')->nullable(); 
+            $table->string('email')->unique();
+            $table->bigInteger("usuario_administrador");
             $table->timestamps();
         });
     }

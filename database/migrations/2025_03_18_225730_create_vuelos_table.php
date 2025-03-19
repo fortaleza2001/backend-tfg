@@ -13,8 +13,20 @@ return new class extends Migration
     {
         Schema::create('vuelos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('aerolinea_id'); // Relación con aerolíneas
+            $table->string('codigo_vuelo')->unique(); // Código de vuelo único (ej: AV123)
+            $table->string('origen'); // Ciudad o aeropuerto de origen
+            $table->string('destino'); // Ciudad o aeropuerto de destino
+            $table->dateTime('hora_salida'); // Hora de salida del vuelo
+            $table->dateTime('hora_llegada'); // Hora estimada de llegada
+            $table->integer('capacidad'); // Capacidad total de pasajeros
+            $table->integer('asientos_disponibles'); // Asientos disponibles
+            $table->enum('estado', ['programado', 'en vuelo', 'aterrizado', 'cancelado'])->default('programado'); // Estado del vuelo
             $table->timestamps();
+        
+            
         });
+        
     }
 
     /**
