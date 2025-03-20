@@ -25,6 +25,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i aws_key.pem juan@ec2-3-228-202-70.compute-1.amazonaws.com << 'EOF'
             cd /home/juan/desarrollo/backend-tfg
             git checkout desarrollo
+            git reset --hard HEAD
             git pull origin desarrollo 
             echo "Seteando variable de entorno de desarrollo ...."
             echo "${{ secrets.LARAVEL_ENV_DESARROLLO }}" > /home/juan/desarrollo/backend-tfg/.env
