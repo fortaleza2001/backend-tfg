@@ -43,12 +43,7 @@ class AuthController extends Controller
         return response()->json(compact('token'));
     }
 
-    // Obtener usuario autenticado
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
-
+  
     // Cerrar sesión
     public function logout()
     {
