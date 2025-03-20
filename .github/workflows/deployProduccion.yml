@@ -28,6 +28,7 @@ jobs:
             git pull origin produccion 
             echo "Seteando variable de entorno de produccion ...."
             echo "${{ secrets.LARAVEL_ENV_PRODUCCION }}" > /home/juan/produccion/backend-tfg/.env
+            composer update
             composer install
             php artisan migrate:refresh --seed
             php artisan l5-swagger:generate
