@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'aerolinea_id'=>1
         ]);
         $this->call(AerolineasSeeder::class);
         $this->call(VuelosSeeder::class);
