@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AerolineaController;
-
+//
 Route::fallback(function (Request $request) {
     return response()->json([
         'message' => 'Esta ruta no existe'
