@@ -5,8 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Aerolinea;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Tag(
+ *     name="Aerolineas",
+ *     description="Endpoints relacionados con aerolíneas"
+ * )
+ */
 class AerolineaController extends Controller
 {
+/**
+    * @OA\Get(
+    *     path="/aerolineas",
+    *     summary="Mostrar Aerolineas",
+    *     tags={"Aerolineas"},  
+    *     @OA\Response(
+    *         response=200,
+    *         description="Mostrar todas las aerolineas."
+    *     )
+    *  
+    * )
+*/
     public function all()
     {
         $aerolineas = Aerolinea::all();
