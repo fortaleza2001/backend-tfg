@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\AerolineasSeeder;
 use Database\Seeders\VuelosSeeder;
+use Database\Seeders\FacturaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call(AerolineasSeeder::class);
         $this->call(VuelosSeeder::class);
+        $this->call(FacturaSeeder::class);
 
     }
 }

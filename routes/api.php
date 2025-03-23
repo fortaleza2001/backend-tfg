@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AerolineaController;
+use App\Http\Controllers\FacturaController;
 //
 Route::fallback(function (Request $request) {
     return response()->json([
@@ -13,6 +14,9 @@ Route::fallback(function (Request $request) {
 
 
 
+
+// Ruta para descargar el PDF de la factura
+Route::get('/factura/{id}/download', [FacturaController::class, 'download']);
 // Rutas públicas
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
