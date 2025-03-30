@@ -43,17 +43,18 @@ class AuthController extends Controller
     
         // Si el token es generado, devolvemos el token en una cookie
         return response()->json(['message' => 'Login exitoso'])
-            ->cookie(
-                'auth-token', // Nombre de la cookie
-                $token, // Valor del token
-                60, // Duración de la cookie (en minutos)
-                '/', // Ruta a la que la cookie será accesible (todas las rutas)
-                null, // Dominio, puede ser null si quieres que se use el dominio por defecto
-                false, // Secure: ahora la cookie no es solo para HTTPS
-                true, // HttpOnly: hace que la cookie no sea accesible desde JavaScript
-                false, // SameSite: Puede ser 'Strict', 'Lax', o 'None'
-                false // Sólo si la cookie debe ser un HttpOnly cookie
-            );
+    ->cookie(
+        'auth-token', // Nombre de la cookie
+        $token, // Valor del token
+        60, // Duración de la cookie en minutos
+        '/', // Ruta a la que la cookie será accesible
+        null, // Dominio, puede ser null si es el dominio actual
+        false, // Secure: establece false si no estás utilizando HTTPS
+        true, // HttpOnly: Hace que la cookie no sea accesible desde JavaScript
+        false, // SameSite: Puede ser 'Strict', 'Lax', o 'None'
+        false // Solo si deseas que la cookie sea un HttpOnly cookie adicional
+    );
+
     }
 
   
