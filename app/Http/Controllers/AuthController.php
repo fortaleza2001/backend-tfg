@@ -48,7 +48,7 @@ class AuthController extends Controller
         $token, // Valor del token
         60, // Duración de la cookie en minutos
         '/', // Ruta a la que la cookie será accesible
-        null, // Dominio, puede ser null si es el dominio actual
+        env('TARGET_DOMAIN'), // Dominio, puede ser null si es el dominio actual
         false, // Secure: establece false si no estás utilizando HTTPS
         true, // HttpOnly: Hace que la cookie no sea accesible desde JavaScript
         false, // SameSite: Puede ser 'Strict', 'Lax', o 'None'
