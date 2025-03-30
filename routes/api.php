@@ -1,5 +1,5 @@
 <?php
-
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
@@ -28,7 +28,21 @@ Route::get('aerolinea/usuario',[AerolineaController::class,'aerolineaUsuario']);
 
 // Rutas protegidas con JWT
 Route::middleware('jwtAuth')->group(function () {
-   
+    Route::get('user', function (Request $request) {
+        try {
+            // Obtiene el usuario autenticado
+            $user = JWTAuth::parseToken()->authenticate();
+    
+            // Devuelve los datos del usuario en formato JSON
+            return response()->json([
+                'user' => $user
+            ], 200);
+    
+        } catch (\Exception $e) {
+            // Si el usuario no está autenticado o hay un error
+            return response()->json(['error' => 'No autorizado'], 401);
+        }
+    });
     Route::post('logout', [AuthController::class, 'logout']); //Cerrar sesión
     Route::post('refresh', [AuthController::class, 'refresh']); //Refrescar token
 
