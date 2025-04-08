@@ -24,6 +24,14 @@ class DatabaseSeeder extends Seeder
             'password'=>'1234',
             'aerolinea_id'=>1
         ]);
+
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'juancarrasquer@gmail.com',
+            'password'=>'725728848004380084580',
+            'aerolinea_id'=>1
+        ]);
+
         $this->call(AerolineasSeeder::class);
         $this->call(VuelosSeeder::class);
         $this->call(FacturaSeeder::class);

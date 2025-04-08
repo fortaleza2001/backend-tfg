@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dateTime('hora_llegada'); // Hora estimada de llegada
             $table->integer('capacidad'); // Capacidad total de pasajeros
             $table->integer('asientos_disponibles'); // Asientos disponibles
+            
             $table->enum('estado', ['programado', 'en vuelo', 'aterrizado', 'cancelado'])->default('programado'); // Estado del vuelo
             $table->timestamps();
         

@@ -19,7 +19,7 @@ Route::fallback(function (Request $request) {
 Route::get('/factura/{id}/download', [FacturaController::class, 'download']);
 // Rutas públicas
 Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+
 
 Route::get('aerolineas',[AerolineaController::class,'all']); //Obtener todas las aerolineas del servidor
 Route::get('aerolineas/filtro',[AerolineaController::class,'buscar']); //Obtener aerolineas con filtros
