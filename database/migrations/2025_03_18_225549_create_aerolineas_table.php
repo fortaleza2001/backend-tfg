@@ -17,8 +17,16 @@ return new class extends Migration
             $table->string('direccion');
             $table->string('pais');
             $table->string('telefono')->nullable(); 
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
+            $table->string('codigo_AITA')->unique();
+            $table->boolean('confirmado')->default(false);
+            $table->string('token_confirmado')->nullable();
+            
             $table->bigInteger("usuario_administrador");
+            $table->string("logoAerolinea")->nullable();
+            $table->bigInteger("id_datos_creador")->nullable();
+            $table->bigInteger("id_datos_pago")->nullable();
+
             $table->timestamps();
         });
     }

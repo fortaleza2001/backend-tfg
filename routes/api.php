@@ -23,7 +23,7 @@ Route::post('register', [AuthController::class, 'register']);
 
 Route::get('aerolineas',[AerolineaController::class,'all']); //Obtener todas las aerolineas del servidor
 Route::get('aerolineas/filtro',[AerolineaController::class,'buscar']); //Obtener aerolineas con filtros
-Route::get('aerolinea/usuario',[AerolineaController::class,'aerolineaUsuario']);//Obtener usuario de la aerolinea
+
 
 
 // Rutas protegidas con JWT

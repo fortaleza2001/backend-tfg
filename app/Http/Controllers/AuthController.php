@@ -19,20 +19,29 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'email' => 'required|string|email|max:255|',
+            'password' => 'required|string|',
         ]);
 
+        if (User::where('email', $request->email)->exists()) {
+            return response()->json([
+                'message' => 'El usuario ya existe con ese correo.'
+            ], 409);
+        }
+
+
         $user = User::create([
-            'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
         ]);
 
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user', 'token'), 201);
+        $cookie = Cookie::make('auth_token', $token, 180, '/', 'localhost', false, true);
+    
+        return response()->json(['message' => 'Usuario creado y Token guardado exitosamente'], 201)->withCookie($cookie);
+
+        
     }
 
     // Inicio de sesión
@@ -47,7 +56,7 @@ class AuthController extends Controller
         }
     
         // Crear la cookie HttpOnly con el token
-        $cookie = Cookie::make('auth_token', $token, 60, '/', 'localhost', false, true);
+        $cookie = Cookie::make('auth_token', $token, 180, '/', 'localhost', false, true);
     
         return response()->json(['message' => 'Token guardado exitosamente'], 200)->withCookie($cookie);
     }

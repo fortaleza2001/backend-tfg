@@ -18,6 +18,7 @@ class Aerolinea extends Model
         'telefono',
         'email',
         'usuario_administrador',
+        
     ];
 
     // Relación con Vuelos
@@ -30,5 +31,15 @@ class Aerolinea extends Model
     public function administrador()
     {
         return $this->belongsTo(User::class, 'usuario_administrador');
+    }
+
+    public function datosPago()
+    {
+        return $this->belongsTo(metodo_pago_aerolinea::class, 'id_datos_pago');
+    }
+
+    public function datosCreador()
+    {
+        return $this->belongsTo(datos_creador_aerolinea::class, 'id_datos_creador');
     }
 }

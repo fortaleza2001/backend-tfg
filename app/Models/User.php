@@ -57,8 +57,9 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    public function aerolinea()
+    public function aerolineas()
     {
-        return $this->belongsTo(Aerolinea::class);
+        return $this->hasMany(Aerolinea::class, 'usuario_administrador');
     }
+    
 }

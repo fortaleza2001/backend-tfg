@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class loginUsuarioTest extends TestCase
 {
-    use RefreshDatabase;
+   
 
     public function test_un_usuario_puede_loguearse_y_obtener_un_token_jwt()
     {

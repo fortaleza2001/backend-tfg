@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'jwtAuth' => JwtMiddleware::class,
+            'auth.token' => \App\Http\Middleware\AuthenticateWithToken::class,
            
         ]);
         $middleware->validateCsrfTokens(except: [

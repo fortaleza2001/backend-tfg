@@ -39,5 +39,21 @@ return [
     'client_secret' => env('GITHUB_CLIENT_SECRET'),
     'redirect' => env('GITHUB_REDIRECT_URI'),
         ],
+        'google' => [
+    'client_id' => env('GOOGLE_CLIENT_ID'),
+    'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+    'redirect' => env('GOOGLE_REDIRECT_URI'),
+],
+'facebook' => [
+    'client_id' => env('FACEBOOK_CLIENT_ID'), // Tu client_id
+    'client_secret' => env('FACEBOOK_CLIENT_SECRET'), // Tu client_secret
+    'redirect' => env('FACEBOOK_REDIRECT_URI'), // La URL de redirección
+],
+
+        'paypal' => [
+    'client_id' => env('PAYPAL_CLIENT_ID'),
+    'secret' => env('PAYPAL_CLIENT_SECRET'),
+    'mode' => env('PAYPAL_MODE', 'sandbox'),
+],
 
 ];
