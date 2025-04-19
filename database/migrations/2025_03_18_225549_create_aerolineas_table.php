@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('telefono')->nullable(); 
             $table->string('email')->nullable();
             $table->string('codigo_AITA')->unique();
-            $table->boolean('confirmado')->default(false);
+            $table->boolean('confirmado')->default(false)->nullable();
             $table->string('token_confirmado')->nullable();
             
-            $table->bigInteger("usuario_administrador");
+            $table->bigInteger("usuario_administrador")->nullable();
             $table->string("logoAerolinea")->nullable();
             $table->bigInteger("id_datos_creador")->nullable();
             $table->bigInteger("id_datos_pago")->nullable();

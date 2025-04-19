@@ -46,6 +46,7 @@ class AerolineasSeeder extends Seeder
                     'telefono' => '+49 69 86 799 799',
                     'email' => 'service@lufthansa.com',
                     'usuario_administrador' => 3,
+                    'confirmado'=>true,
                     'codigo_AITA' => 'LH',
                     'created_at' => now(),
                     'updated_at' => now(),

@@ -8,6 +8,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\AerolineaController;
+use App\Http\Controllers\VueloController;
+
 use App\Models\Aerolinea;
 
 
@@ -61,7 +63,9 @@ Route::get('/paypal-cancel', [PayPalController::class, 'cancel'])->name('paypal.
 Route::middleware('auth.token')->group(function () {
     Route::get('aerolinea/usuario',[AerolineaController::class,'aerolineasUsuario']);
     Route::post('aerolinea/CrearAerolinea',[AerolineaController::class,'CrearAerolinea']);
+    Route::post('aerolinea/CrearVuelo',[VueloController::class,'store']);
     Route::get('aerolinea/{id}',[AerolineaController::class,'obtener_aerolinea']);
+    Route::get('aerolinea/{id}/vuelos',[VueloController::class,'obtenerVuelos']);
 
 });
 
