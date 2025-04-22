@@ -16,7 +16,8 @@ return [
     'supports_credentials' => true, // Permitir el envío de credenciales como cookies
 
     'allowed_origins' => [
-        'http://localhost:4200',  // URL de tu frontend (Angular, por ejemplo)
+        'http://localhost:4200',
+        'https://web.mythical-airline.tech/',  
         // Otros dominios permitidos, si los hay.
     ],
 

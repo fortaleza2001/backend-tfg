@@ -60,6 +60,9 @@ Route::post('/registro', [AuthController::class, 'register']);
 Route::get('/buy-flight', [PayPalController::class, 'buyFlight'])->name('paypal.buy');
 Route::get('/paypal-success', [PayPalController::class, 'success'])->name('paypal.success');
 Route::get('/paypal-cancel', [PayPalController::class, 'cancel'])->name('paypal.cancel');
+Route::post('forgot-password', [AuthController::class, 'sendResetLinkEmail']);
+Route::post('verificar-token-pass', [AuthController::class, 'verificarTokencontrasena']);
+Route::post('cambiar-contrasena', [AuthController::class, 'cambiarcontrasena']);
 Route::middleware('auth.token')->group(function () {
     Route::get('aerolinea/usuario',[AerolineaController::class,'aerolineasUsuario']);
     Route::post('aerolinea/CrearAerolinea',[AerolineaController::class,'CrearAerolinea']);

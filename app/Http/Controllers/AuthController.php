@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CustomResetPassword;
 
 use Illuminate\Support\Facades\Cookie;
 
@@ -116,7 +119,96 @@ class AuthController extends Controller
     return response()->json(['message' => 'Sesión cerrada correctamente']);
 }
 
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+
+     $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json([
+                'error' => 'No encontramos un usuario con ese correo electrónico.'
+            ], 400);
+        }
+
+        // Generar el token de restablecimiento
+        $token = Password::createToken($user);
+
+        // Enviar el correo
+        Mail::to($user->email)->send(new CustomResetPassword($token, $user->email));
+      
+     
+            return response()->json([
+                'message' => 'Hemos enviado un enlace para restablecer tu contraseña a tu correo.'
+            ], 200); // Status 200 OK
+        
+
     
+    
+    }
+    
+
+
+public function verificarTokencontrasena(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'token' => 'required'
+    ]);
+
+    // Obtenemos el usuario por email
+    $user = User::where('email', $request->email)->first();
+
+    if (! $user) {
+        return response()->json(['error' => 'Usuario no encontrado.'], 404);
+    }
+
+    // Verificamos el token usando el broker de Password
+    $tokenIsValid = Password::getRepository()->exists($user, $request->token);
+
+    if ($tokenIsValid) {
+        return response()->json(['message' => 'Token válido.'], 200);
+    }
+
+    return response()->json(['error' => 'Token inválido o expirado.'], 400);
+}
+
+public function cambiarcontrasena(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'token' => 'required',
+        'password'=> 'required'
+        
+    ]);
+
+    // Obtenemos el usuario por email
+    $user = User::where('email', $request->email)->first();
+
+    if (! $user) {
+        return response()->json(['error' => 'Usuario no encontrado.'], 404);
+    }
+
+    // Verificamos el token usando el broker de Password
+    $tokenIsValid = Password::getRepository()->exists($user, $request->token);
+
+    if ($tokenIsValid) 
+    {
+        Password::getRepository()->delete($user, $request->token);
+
+        $user->password = $request->password;
+        return response()->json(['message' => 'Contraseña cambiada'], 200);
+    }
+    else
+    {
+        return response()->json(['error' => 'Token no valido.'], 404);
+    }
+
+   
+}
 
     // Refrescar token
     public function refresh()
