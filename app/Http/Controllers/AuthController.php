@@ -40,7 +40,7 @@ class AuthController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        $cookie = Cookie::make('auth_token', $token, 180, '/', 'localhost', false, true);
+        $cookie = Cookie::make('auth_token', $token, 180, '/', env("COOKY_DOMAIN"), false, true);
     
         return response()->json(['message' => 'Usuario creado y Token guardado exitosamente'], 201)->withCookie($cookie);
 
@@ -59,7 +59,7 @@ class AuthController extends Controller
         }
     
         // Crear la cookie HttpOnly con el token
-        $cookie = Cookie::make('auth_token', $token, 180, '/', 'localhost', false, true);
+        $cookie = Cookie::make('auth_token', $token, 180, '/', env("COOKY_DOMAIN"), false, true);
     
         return response()->json(['message' => 'Token guardado exitosamente'], 200)->withCookie($cookie);
     }

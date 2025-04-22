@@ -17,7 +17,7 @@ return [
 
     'allowed_origins' => [
         'http://localhost:4200',
-        'https://web.mythical-airline.tech/',  
+        'https://web.mythical-airline.tech',  
         // Otros dominios permitidos, si los hay.
     ],
 
