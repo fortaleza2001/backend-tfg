@@ -8,6 +8,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\AerolineaController;
+use App\Http\Controllers\AirportController;
 use App\Http\Controllers\VueloController;
 
 use App\Models\Aerolinea;
@@ -55,14 +56,16 @@ Route::get('/check-auth', [AuthController::class, 'checkAuth']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/registro', [AuthController::class, 'register']);
-
+Route::get('/aerolineas', [AerolineaController::class, 'all']);
 
 Route::get('/buy-flight', [PayPalController::class, 'buyFlight'])->name('paypal.buy');
 Route::get('/paypal-success', [PayPalController::class, 'success'])->name('paypal.success');
 Route::get('/paypal-cancel', [PayPalController::class, 'cancel'])->name('paypal.cancel');
+Route::get('/aeropuertos/{countryCode}', [AirportController::class, 'byCountry']);
 Route::post('forgot-password', [AuthController::class, 'sendResetLinkEmail']);
 Route::post('verificar-token-pass', [AuthController::class, 'verificarTokencontrasena']);
 Route::post('cambiar-contrasena', [AuthController::class, 'cambiarcontrasena']);
+Route::post('/soporte/mensaje', [AuthController::class, 'enviarMensaje']);
 Route::middleware('auth.token')->group(function () {
     Route::get('aerolinea/usuario',[AerolineaController::class,'aerolineasUsuario']);
     Route::post('aerolinea/CrearAerolinea',[AerolineaController::class,'CrearAerolinea']);

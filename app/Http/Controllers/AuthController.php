@@ -210,6 +210,24 @@ public function cambiarcontrasena(Request $request)
    
 }
 
+
+public function enviarMensaje(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'mensaje' => 'required|string|max:2000',
+    ]);
+
+    $datos = $request->only('email', 'mensaje');
+
+    Mail::send('emails.soporte', $datos, function ($mail) use ($datos) {
+        $mail->to('juancarrasquer@gmail.com')
+             ->subject('Nuevo mensaje de soporte')
+             ->replyTo($datos['email']);
+    });
+
+    return response()->json(['mensaje' => 'Mensaje enviado correctamente.']);
+}
     // Refrescar token
     public function refresh()
     {
