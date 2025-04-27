@@ -32,7 +32,7 @@ jobs:
             grep -q 'APP_URL=' /home/juan/desarrollo/backend-tfg/.env || echo 'APP_URL=https://api.mythical-airline.tech' >> /home/juan/desarrollo/backend-tfg/.env
             grep -q 'COOKY_DOMAIN_DOMAIN=' /home/juan/desarrollo/backend-tfg/.env || echo 'COOKY_DOMAIN=.mythical-airline.tech' >> /home/juan/desarrollo/backend-tfg/.env
             grep -q '^DB_HOST=' /home/juan/desarrollo/backend-tfg/.env || echo 'DB_HOST=127.0.0.1' >> /home/juan/desarrollo/backend-tfg/.env
-            cat /home/juan/desarrollo/backend-tfg/.env | grep DB_HOST
+            echo /home/juan/desarrollo/backend-tfg/.env | grep DB_HOST
             composer update
             composer install
             php artisan migrate:refresh --seed
