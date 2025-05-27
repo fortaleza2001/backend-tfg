@@ -17,7 +17,7 @@ class AirportSeeder extends Seeder
         $csv = Reader::createFromPath(database_path('seeders/airports.csv'), 'r');
         $csv->setHeaderOffset(0);
 
-        foreach ($csv->getRecords() as $record) {
+       /**foreach ($csv->getRecords() as $record) {
             DB::table('airports')->insert([
                 'ident' => $record['ident'],
                 'type' => $record['type'],
@@ -35,6 +35,7 @@ class AirportSeeder extends Seeder
             ]);
             
         }
+        */
                 
      
     }

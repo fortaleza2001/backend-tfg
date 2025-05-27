@@ -9,8 +9,9 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+   public function up(): void
+{
+    if (!Schema::hasTable('airports')) {
         Schema::create('airports', function (Blueprint $table) {
             $table->id();
             $table->string('ident')->nullable();
@@ -26,14 +27,12 @@ return new class extends Migration
             $table->string('gps_code', 10)->nullable();
             $table->timestamps();
         });
-        
     }
+}
+
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('airports');
-    }
+    
 };
