@@ -138,7 +138,7 @@ Route::get('/auth/github/callback', function () {
 Route::get('auth/google', function () {
     return Socialite::driver('google')->with(["prompt" => "select_account"]) ->redirect();
 });
-// magia 2
+// magia 3
 Route::get('auth/google/callback', function () {
 
     $user = Socialite::driver('google')->stateless()->user();
