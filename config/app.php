@@ -12,6 +12,10 @@ return [
     | other UI elements where an application name needs to be displayed.
     |
     */
+    'aliases' => [
+    // Otros alias
+    'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+],
 
     'name' => env('APP_NAME', 'Laravel'),
 
@@ -65,7 +69,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Madrid',
+
 
     /*
     |--------------------------------------------------------------------------

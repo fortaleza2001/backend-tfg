@@ -15,7 +15,7 @@ use Illuminate\Support\ServiceProvider;
  *         email="juancarrasquer@gmail.com"
  *     )
  * )
- */
+ */use Illuminate\Support\Facades\Config;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +32,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+         date_default_timezone_set(Config::get('app.timezone'));
     }
 }

@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -9,13 +10,14 @@ use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\AerolineaController;
 use App\Http\Controllers\AirportController;
+use App\Http\Controllers\TicketpdfController;
 use App\Http\Controllers\VueloController;
 
 use App\Models\Aerolinea;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('emails.welcome');
 });
 
 use Illuminate\Support\Str;
@@ -57,6 +59,11 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/registro', [AuthController::class, 'register']);
 Route::get('/aerolineas', [AerolineaController::class, 'all']);
+Route::post('/buscar-vuelos', [VueloController::class, 'buscarVuelos']);
+Route::get('/obtener-paises', [AirportController::class, 'obtenerPaises']);
+Route::get('/obtener-aeropuertos/{pais}', [AirportController::class, 'obtenerAeropuertosPais']);
+Route::get('/obtener-aerolineas-trabajo', [AerolineaController::class, 'all']);
+Route::get('/obtener-vuelo/{id}', [VueloController::class, 'obtenerVuelo']);
 
 Route::get('/buy-flight', [PayPalController::class, 'buyFlight'])->name('paypal.buy');
 Route::get('/paypal-success', [PayPalController::class, 'success'])->name('paypal.success');
@@ -72,7 +79,14 @@ Route::middleware('auth.token')->group(function () {
     Route::post('aerolinea/CrearVuelo',[VueloController::class,'store']);
     Route::get('aerolinea/{id}',[AerolineaController::class,'obtener_aerolinea']);
     Route::get('aerolinea/{id}/vuelos',[VueloController::class,'obtenerVuelos']);
-
+    Route::post('vuelos/comprarVuelo',[TicketController::class,'comprarTickets']);
+    Route::get('/reservas/vuelos', [TicketController::class, 'obtenerVuelos']);
+    Route::get('/ticket/{id}', [TicketpdfController::class, 'generarTicket']);
+    Route::get('/generar-factura/{id}', [TicketpdfController::class, 'generarFactura']);
+    Route::get('/obtenerReservas/{id}', [VueloController::class, 'obtenerVueloReserva']);
+    Route::post('/devolverTicket/{id}', [TicketController::class, 'devolverTicket']);
+ 
+    
 });
 
 
@@ -100,13 +114,20 @@ Route::get('/auth/github/callback', function () {
 
     if (!$userReal) 
     {
+        $userReal2 = User::create([
+                    'email' => $user->email,
+                    'password' => '1234'
+                ]);
 
+                $token = JWTAuth::fromUser($userReal2);
+                 $cookie = Cookie::make('auth_token', $token, 600, '/', 'localhost', false, true);
+                 return redirect(env("TARGET_DOMAIN")."/home")->cookie($cookie);
     }
     else
     {
         $token = JWTAuth::fromUser($userReal);
        
-        $cookie = Cookie::make('auth_token', $token, 60, '/', 'localhost', false, true);
+        $cookie = Cookie::make('auth_token', $token, 600, '/', 'localhost', false, true);
        
     
         return redirect(env("TARGET_DOMAIN")."/home")->cookie($cookie);
@@ -126,13 +147,21 @@ Route::get('auth/google/callback', function () {
 
     if (!$userReal) 
     {
+         $userReal2 = User::create([
+                    'email' => $user->email,
+                    'password' => '1234'
+                ]);
 
+                $token = JWTAuth::fromUser($userReal2);
+                 $cookie = Cookie::make('auth_token', $token, 600, '/', 'localhost', false, true);
+                 return redirect(env("TARGET_DOMAIN")."/home")->cookie($cookie);
+    
     }
     else
     {
         $token = JWTAuth::fromUser($userReal);
        
-        $cookie = Cookie::make('auth_token', $token, 60, '/', 'localhost', false, true);
+        $cookie = Cookie::make('auth_token', $token, 6600, '/', 'localhost', false, true);
        
     
         return redirect(env("TARGET_DOMAIN")."/home")->cookie($cookie);

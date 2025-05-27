@@ -26,17 +26,13 @@ class DatabaseSeeder extends Seeder
             
         ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'juancarrasquer@gmail.com',
-            'password'=>'725728848004380084580',
-           
-        ]);
+    
 
         $this->call(AerolineasSeeder::class);
         $this->call(VuelosSeeder::class);
         $this->call(FacturaSeeder::class);
-        //$this->call(AirportSeeder::class);
+        $this->call(AirportSeeder::class);
+        $this->call(CountrySeeder::class);
 
     }
 }

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('codigo_vuelo')->unique(); // Código de vuelo único (ej: AV123)
             $table->string('origen_pais'); // Ciudad o aeropuerto de origen
             $table->string('destino_pais'); // Ciudad o aeropuerto de destino
-            $table->string('origen_aeropuesto'); // Ciudad o aeropuerto de origen
-            $table->string('destino_aeropuerto'); // Ciudad o aeropuerto de destino
+            $table->bigInteger('origen_aeropuesto'); // Ciudad o aeropuerto de origen
+            $table->bigInteger('destino_aeropuerto'); // Ciudad o aeropuerto de destino
             $table->string('origen_terminal'); // Ciudad o aeropuerto de origen
             $table->string('destino_terminal'); // Ciudad o aeropuerto de destino
             $table->dateTime('fecha_salida'); // Hora de salida del vuelo

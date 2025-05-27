@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Airport;
 use Illuminate\Http\Request;
 
+use App\Models\Country;
+
 class AirportController extends Controller
 {
     public function index()
@@ -42,4 +44,17 @@ class AirportController extends Controller
         $airport->delete();
         return response()->json(null, 204);
     }
+
+    public function obtenerPaises()
+    {
+        $paises = Country::all();
+        return response()->json($paises, 200);
+    }
+    public function obtenerAeropuertosPais($pais)
+    {
+        $aeropuertos = Airport::where('iso_country', $pais)->get();
+
+        return response()->json($aeropuertos,200);
+    }
+
 }

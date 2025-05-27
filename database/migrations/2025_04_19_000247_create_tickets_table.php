@@ -19,8 +19,14 @@ return new class extends Migration
             $table->enum('estado', ['disponible', 'vendido'])->default('disponible');
             $table->bigInteger('vuelo_id');
             $table->bigInteger('usuario_id')->nullable();
-            $table->boolean("reembolsable");
+            $table->boolean("reembolsable")->nullable();
             $table->integer("equipajeIncluidoKg");
+            $table->string('direccion_usuario')->nullable();
+            $table->string('nombre_usuario')->nullable();
+            $table->string('dni_usuario')->nullable();
+            $table->binary("ticket_pdf")->nullable();
+            $table->date("fecha_compra")->nullable();
+
             $table->timestamps();
         });
     }
