@@ -120,14 +120,14 @@ Route::get('/auth/github/callback', function () {
                 ]);
 
                 $token = JWTAuth::fromUser($userReal2);
-                 $cookie = Cookie::make('auth_token', $token, 600, '/', 'localhost', false, true);
+                 $cookie = Cookie::make('auth_token', $token, 600, '/', '.mythical-airline.tech', false, true);
                  return redirect(env("TARGET_DOMAIN")."/home")->cookie($cookie);
     }
     else
     {
         $token = JWTAuth::fromUser($userReal);
        
-        $cookie = Cookie::make('auth_token', $token, 600, '/', 'localhost', false, true);
+        $cookie = Cookie::make('auth_token', $token, 600, '/', '.mythical-airline.tech', false, true);
        
     
         return redirect(env("TARGET_DOMAIN")."/home")->cookie($cookie);
