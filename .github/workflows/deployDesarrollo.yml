@@ -35,11 +35,9 @@ jobs:
             composer update
             composer install
             php artisan migrate:refresh --seed
-            php artisan l5-swagger:generate
             echo " Deteniendo cualquier proceso en el puerto 8000..."
             fuser -k 8000/tcp || true
             echo " Iniciando Laravel en el puerto 8000..."
-            nohup php artisan serve --host=0.0.0.0 --port=8000 > /dev/null 2>&1 &
             echo "✅ Despliegue completado."
             exit
           EOF
