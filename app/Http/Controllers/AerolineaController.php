@@ -93,6 +93,7 @@ class AerolineaController extends Controller
                 'contenido' => null
             ], 404);
         }
+        //hola
     
         return response()->json([
             'mensaje' => 'Consulta exitosa',
