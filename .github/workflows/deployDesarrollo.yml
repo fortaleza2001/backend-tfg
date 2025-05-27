@@ -31,10 +31,6 @@ jobs:
             echo "${{ secrets.LARAVEL_ENV_DESARROLLO }}" > /home/juan/desarrollo/backend-tfg/.env
             grep -q 'APP_URL=' /home/juan/desarrollo/backend-tfg/.env || echo 'APP_URL=https://api.mythical-airline.tech' >> /home/juan/desarrollo/backend-tfg/.env
             grep -q 'COOKY_DOMAIN_DOMAIN=' /home/juan/desarrollo/backend-tfg/.env || echo 'COOKY_DOMAIN=.mythical-airline.tech' >> /home/juan/desarrollo/backend-tfg/.env
-            grep -q 'GITHUB_CLIENT_ID=' /home/juan/desarrollo/backend-tfg/.env || echo 'GITHUB_CLIENT_ID = Ov23licRjfB7gffZOXvg' >> /home/juan/desarrollo/backend-tfg/.env
-            grep -q 'GITHUB_CLIENT_SECRET=' /home/juan/desarrollo/backend-tfg/.env || echo 'GITHUB_CLIENT_SECRET = 778eb23f58542240c7f75d23beab307ed040d5be' >> /home/juan/desarrollo/backend-tfg/.env
-            grep -q 'GITHUB_REDIRECT_URI=' /home/juan/desarrollo/backend-tfg/.env || echo 'GITHUB_REDIRECT_URI = https://api.mythical-airline.tech/auth/github/callback' >> /home/juan/desarrollo/backend-tfg/.env
-
              
             composer update
             composer install
