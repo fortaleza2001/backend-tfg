@@ -153,7 +153,7 @@ Route::get('auth/google/callback', function () {
                 ]);
 
                 $token = JWTAuth::fromUser($userReal2);
-                 $cookie = Cookie::make('auth_token', $token, 600, '/', 'localhost', false, true);
+                 $cookie = Cookie::make('auth_token', $token, 600, '/', env('COOKY_DOMAIN'), false, true);
                  return redirect(env("TARGET_DOMAIN")."/home")->cookie($cookie);
     
     }
@@ -161,7 +161,7 @@ Route::get('auth/google/callback', function () {
     {
         $token = JWTAuth::fromUser($userReal);
        
-        $cookie = Cookie::make('auth_token', $token, 6600, '/', 'localhost', false, true);
+        $cookie = Cookie::make('auth_token', $token, 6600, '/', env('COOKY_DOMAIN'), false, true);
        
     
         return redirect(env("TARGET_DOMAIN")."/home")->cookie($cookie);
